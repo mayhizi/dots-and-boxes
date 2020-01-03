@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -5,6 +7,31 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
+    {
+      resolve: "gatsby-plugin-firebase",
+      options: {
+        features: {
+          auth: true,
+          database: true,
+          firestore: false,
+          storage: false,
+          messaging: false,
+          functions: true,
+          performance: false,
+        },
+        credentials: {
+          apiKey: `.env.${process.env.GATSBY_FIREBASE_API_KEY}`,
+          authDomain: `.env.${process.env.GATSBY_FIREBASE_AUTH_DOMAIN}`,
+          databaseURL: `.env.${process.env.GATSBY_FIREBASE_DATABASE_URL}`,
+          projectId: `.env.${process.env.GATSBY_FIREBASE_PROJECT_ID}`,
+          storageBucket: `.env.${process.env.GATSBY_FIREBASE_STORAGE_BUCKET}`,
+          messagingSenderId: `.env.${process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID}`,
+          appId: `.env.${process.env.GATSBY_FIREBASE_APP_ID}`,
+        },
+      },
+    },
+
+    `gatsby-plugin-antd`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,

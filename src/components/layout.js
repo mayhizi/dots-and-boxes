@@ -6,13 +6,12 @@
  */
 
 import React from "react"
-import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import { Layout, Row, Col, Typography } from "antd"
+const { Header, Footer, Content } = Layout
+const { Text, Title } = Typography
 
-import Header from "./header"
-import "./layout.css"
-
-const Layout = ({ children }) => {
+const LayoutComponent = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -25,7 +24,27 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Layout>
+        <Header style={{ background: "white" }}>
+          <Row>
+            <Col span={8} offset={8}>
+              {/* <Menu
+                theme="light"
+                mode="horizontal"
+                defaultSelectedKeys={["1"]}
+                style={{ lineHeight: "64px", backgroundColor: "white" }}
+              > */}
+              <Title style={{ textAlign: "center", color: "black" }}>
+                Dots and Boxes
+              </Title>
+              {/* </Menu> */}
+            </Col>
+          </Row>
+        </Header>
+        <Content>{children}</Content>
+        <Footer style={{ background: "white" }}>Footer</Footer>
+      </Layout>
+      {/* <Header siteTitle={data.site.siteMetadata.title} />
       <div
         style={{
           margin: `0 auto`,
@@ -39,14 +58,14 @@ const Layout = ({ children }) => {
           © {new Date().getFullYear()}, Built with
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
+        </footer> */}
+      {/* </div> */}
     </>
   )
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
+// LayoutComponent.propTypes = {
+//   children: PropTypes.node.isRequired,
+// }
 
-export default Layout
+export default LayoutComponent
